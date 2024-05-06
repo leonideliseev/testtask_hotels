@@ -1,35 +1,27 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
 func main() {
-	numbers := []int{-18, 42, 12, 18}
-	fmt.Println(commonDiv(numbers))
+	var a int
+	fmt.Scan(&a)
+	output(a)
 }
 
-func commonDiv(nums []int) []int {
-	ans := []int{}
-	num := nums[0]
-	// заполняем только для первого числа
-	// я слелал, чтобы работало для отрицательных чисел,
-	// но делители были только положительными
-	for e := 2; e <= int(math.Pow(math.Abs(float64(num)), 0.5)); e++ {
-		if num % e == 0 {
-			ans = append(ans, e)
-			ans = append(ans, int(math.Abs(float64(num/e))))
+func output(n int) {
+	if n < 0 {
+		return
+	}
+	if 11 <= n%100 && n%100 <= 14 {
+		fmt.Println(n, "компьютеров")
+	} else {
+		t := n % 10
+		if t == 1 {
+			fmt.Println(n, "компьютер")
+		} else if 2 <= t && t <= 4 {
+			fmt.Println(n, "компьютера")
+		} else {
+			fmt.Println(n, "компьютеров")
 		}
 	}
-	for _, num := range nums {
-		// идём с конца чтобы удаляя не ломать индексы
-		for i := len(ans)-1; i >= 0; i-- {
-			// если делитель одного числа не делитель другого - удаляем
-			if num % ans[i] != 0 {
-				ans = append(ans[:i], ans[i+1:]...)
-			}
-		}
-	}
-	return ans
 }
