@@ -56,6 +56,9 @@ func (mT *MultTable) PrintTeble() {
 func main() {
 	var n int
 	fmt.Scan(&n)
+	if n <= 0 {
+		return
+	}
 	table := InitTable(n)
 	table.PrintTeble()
 }
