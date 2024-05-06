@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	numbers := []int{-18, 42, 12, 18}
+	numbers := []int{-9, -18, 45, 27, 18}
 	fmt.Println(commonDiv(numbers))
 }
 
@@ -16,11 +16,22 @@ func commonDiv(nums []int) []int {
 	// заполняем только для первого числа
 	// я слелал, чтобы работало для отрицательных чисел,
 	// но делители были только положительными
-	for e := 2; e <= int(math.Pow(math.Abs(float64(num)), 0.5)); e++ {
+	for e := 1; e <= int(math.Pow(math.Abs(float64(num)), 0.5)); e++ {
+		// если сразу начинать с двух, из-за корня
+		// цикл будет срабатывать только с 4
+		if e == 1 { continue }
 		if num % e == 0 {
 			ans = append(ans, e)
-			ans = append(ans, int(math.Abs(float64(num/e))))
+			secondDiv := int(math.Abs(float64(num/e)))
+			// проверка не сработает в случае, когда число - квадрат
+			if secondDiv != e {
+				ans = append(ans, secondDiv)
+			}
 		}
+	}
+	// само число тоже может быть делителем
+	if num != 1 {
+		ans = append(ans, int(math.Abs(float64(num))))
 	}
 	for _, num := range nums {
 		// идём с конца чтобы удаляя не ломать индексы
