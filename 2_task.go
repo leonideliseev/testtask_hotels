@@ -16,10 +16,7 @@ func commonDiv(nums []int) []int {
 	// заполняем только для первого числа
 	// я слелал, чтобы работало для отрицательных чисел,
 	// но делители были только положительными
-	for e := 1; e <= int(math.Pow(math.Abs(float64(num)), 0.5)); e++ {
-		// если сразу начинать с двух, из-за корня
-		// цикл будет срабатывать только с 4
-		if e == 1 { continue }
+	for e := 2; e <= int(math.Pow(math.Abs(float64(num)), 0.5)); e++ {
 		if num % e == 0 {
 			ans = append(ans, e)
 			secondDiv := int(math.Abs(float64(num/e)))
