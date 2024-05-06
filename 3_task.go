@@ -26,6 +26,9 @@ func isPrime(num int) bool {
 }
 
 func primesNum(min, max int) []int {
+	if max < min {
+		return []int{}
+	}
 	primes := []int{}
 	for i := min; i <= max; i++ {
 		if isPrime(i) {
